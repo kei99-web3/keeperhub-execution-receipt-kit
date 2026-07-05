@@ -1,0 +1,46 @@
+{
+  "schema": "keeperhub.execution_receipt.v0",
+  "status": "keeperhub_read_workflow_executed",
+  "evidenceType": "read_workflow_run",
+  "keeperHubEvidence": {
+    "workflowId": "undydd3dmaeykbzmky9ik",
+    "executionId": "bh1dkp3uur0u41ftwivft",
+    "workflowRunId": "wrun_01KWRFQK1EQG92MERS9N49G5W6",
+    "executedWorkflowHash": "648adbde9c7c15bc126729dfac12194e7832e3ba3f23c266028a14a23bbf5505",
+    "workflowType": "read",
+    "triggerSource": "manual",
+    "chain": "base-sepolia",
+    "chainId": 84532,
+    "network": "Base Sepolia",
+    "timestampStart": "2026-07-05T06:33:56.004Z",
+    "timestampEnd": "2026-07-05T06:33:56.494Z",
+    "durationMs": 400,
+    "outcome": "success",
+    "transactionHashes": [],
+    "gasUsedWei": null,
+    "billable": true,
+    "auditTrailUrl": null
+  },
+  "readAction": {
+    "plugin": "web3",
+    "action": "check-balance",
+    "requiresCredentials": false,
+    "targetAddress": "0xE2DCfA30895757BaEEFAE53568C2dc9fa422815D",
+    "addressLink": "https://sepolia.basescan.org/address/0xE2DCfA30895757BaEEFAE53568C2dc9fa422815D"
+  },
+  "result": {
+    "success": true,
+    "address": "0xE2DCfA30895757BaEEFAE53568C2dc9fa422815D",
+    "balance": "0.0",
+    "balanceWei": "0",
+    "addressLink": "https://sepolia.basescan.org/address/0xE2DCfA30895757BaEEFAE53568C2dc9fa422815D"
+  },
+  "safetyNotes": [
+    "No wallet signature was requested.",
+    "No token approval was requested.",
+    "No transfer was submitted.",
+    "No transaction hash exists because this proof is a read-only KeeperHub workflow run.",
+    "A separate user-attended testnet write run is still required for transaction-hash evidence."
+  ],
+  "schemaNote": "During creation, KeeperHub rejected chainId in the web3/check-balance config and required network instead. The final run used the accepted KeeperHub API shape."
+}
