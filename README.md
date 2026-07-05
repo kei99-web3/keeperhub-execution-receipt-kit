@@ -4,13 +4,13 @@ Policy-gated execution receipts for AI agents preparing KeeperHub onchain workfl
 
 ## Status
 
-This repository now includes one authenticated KeeperHub read workflow execution. It still does not claim a submitted transaction hash, because the captured run was a read-only Base Sepolia balance check.
+This repository now includes one authenticated KeeperHub read workflow execution and one user-approved KeeperHub Base Sepolia write transaction.
 
 Current honest claim:
 
-> The kit generates KeeperHub-ready execution requests and audit-ready receipt records, blocks unsafe requests fail-closed, and includes one real KeeperHub read workflow run as execution evidence.
+> The kit generates KeeperHub-ready execution requests and audit-ready receipt records, blocks unsafe requests fail-closed, and includes real KeeperHub read/write evidence on Base Sepolia.
 
-The project should only claim transaction execution after a user-approved KeeperHub write run produces an actual transaction hash. The current evidence is a real KeeperHub workflow/run id for a read-only action.
+The transaction evidence is a zero-value self-transfer on Base Sepolia. It exists only to prove the KeeperHub execution path without moving value.
 
 ## Why This Exists
 
@@ -33,6 +33,7 @@ KeeperHub is the execution layer. This kit is the receipt and policy layer aroun
 - Deterministic intent, policy, request, and receipt hashes
 - Placeholder fields for real KeeperHub workflow/run evidence
 - Real KeeperHub read workflow evidence for Base Sepolia balance checking
+- Real KeeperHub write transaction evidence for a zero-value Base Sepolia self-transfer
 
 ## Real KeeperHub Read Evidence
 
@@ -50,6 +51,21 @@ Captured on 2026-07-05:
 - Transaction hashes: none, because this was read-only
 - Evidence JSON: `examples/keeperhub_read_execution_evidence.json`
 
+## Real KeeperHub Write Evidence
+
+Captured on 2026-07-05:
+
+- Execution ID: `atjoe5a6460z2ueqm1yem`
+- Chain: Base Sepolia (`84532`)
+- From: `0xE2DCfA30895757BaEEFAE53568C2dc9fa422815D`
+- To: `0xE2DCfA30895757BaEEFAE53568C2dc9fa422815D`
+- Amount: `0 ETH`
+- Transaction hash: `0x3098fabd21ec72c51d2d2aed87b7777e6fc5f15eddc423340e7ba4f802e66ac5`
+- Explorer: https://sepolia.basescan.org/tx/0x3098fabd21ec72c51d2d2aed87b7777e6fc5f15eddc423340e7ba4f802e66ac5
+- Gas used: `21000`
+- RPC receipt status: `0x1`
+- Evidence JSON: `examples/keeperhub_write_execution_evidence.json`
+
 ## Run Locally
 
 ```bash
@@ -66,7 +82,7 @@ Public preview video:
 - `media/keeperhub-execution-receipt-public-preview.mp4`
 - `media/keeperhub-execution-receipt-public-preview-contact-sheet.jpg`
 
-This public preview is marked as KeeperHub read-run evidence with write transaction evidence still pending. After a user-approved KeeperHub testnet write run, replace it with a final video that includes the transaction hash.
+This public preview now includes both the KeeperHub read-run evidence and the user-approved Base Sepolia transaction hash.
 
 ## Planned KeeperHub Integration
 
@@ -75,12 +91,9 @@ Completed:
 1. Connected to KeeperHub through the remote MCP endpoint.
 2. Created and validated one minimal read-only Base Sepolia workflow.
 3. Executed the workflow manually and captured workflow/run evidence.
-
-Still pending for transaction-hash proof:
-
-1. Fund or select a testnet wallet path.
-2. Execute exactly one low-risk KeeperHub write action with user-attended signing.
-3. Attach the resulting transaction hash, chain, timestamp, gas/outcome, and audit URL to the receipt.
+4. Funded the KeeperHub wallet with Base Sepolia ETH through CDP Faucet.
+5. Executed exactly one low-risk zero-value KeeperHub write action.
+6. Attached the resulting transaction hash, chain, timestamp, gas/outcome, and explorer URL to the receipt.
 
 ## Safety Boundary
 
@@ -92,7 +105,7 @@ This candidate intentionally excludes:
 - internal workspace reports
 - private messaging automations
 - private strategy logs
-- fake transaction hashes
+- fake transaction hashes or unverified execution claims
 
 ## License
 

@@ -1,0 +1,50 @@
+{
+  "schema": "keeperhub.execution_receipt.v0",
+  "status": "keeperhub_write_transaction_executed",
+  "evidenceType": "write_transaction",
+  "keeperHubEvidence": {
+    "executionId": "atjoe5a6460z2ueqm1yem",
+    "chain": "base-sepolia",
+    "chainId": 84532,
+    "network": "Base Sepolia",
+    "timestamp": "2026-07-05T07:27:32Z",
+    "outcome": "success",
+    "transactionHashes": [
+      "0x3098fabd21ec72c51d2d2aed87b7777e6fc5f15eddc423340e7ba4f802e66ac5"
+    ],
+    "auditTrailUrl": null
+  },
+  "writeAction": {
+    "plugin": "web3",
+    "action": "transfer-funds",
+    "idempotencyKey": "keeperhub-bounty-zero-self-transfer-20260705-02",
+    "fromAddress": "0xE2DCfA30895757BaEEFAE53568C2dc9fa422815D",
+    "toAddress": "0xE2DCfA30895757BaEEFAE53568C2dc9fa422815D",
+    "amountEth": "0",
+    "purpose": "low-risk KeeperHub write execution proof for bounty evidence"
+  },
+  "transaction": {
+    "hash": "0x3098fabd21ec72c51d2d2aed87b7777e6fc5f15eddc423340e7ba4f802e66ac5",
+    "explorer": "https://sepolia.basescan.org/tx/0x3098fabd21ec72c51d2d2aed87b7777e6fc5f15eddc423340e7ba4f802e66ac5",
+    "from": "0xe2dcfa30895757baeefae53568c2dc9fa422815d",
+    "to": "0xe2dcfa30895757baeefae53568c2dc9fa422815d",
+    "status": "0x1",
+    "blockNumber": 43734083,
+    "gasUsed": "21000",
+    "effectiveGasPriceWei": "7200000",
+    "type": "0x2"
+  },
+  "funding": {
+    "source": "Coinbase Developer Platform Faucet",
+    "network": "Base Sepolia",
+    "amountReceivedEth": "0.0001",
+    "postTransactionBalanceEth": "0.000099824589382395"
+  },
+  "safetyNotes": [
+    "The transaction was executed on Base Sepolia testnet.",
+    "The transaction amount was exactly 0 ETH.",
+    "The destination was the same KeeperHub wallet address.",
+    "No mainnet transaction was executed.",
+    "No positive value transfer was executed."
+  ]
+}

@@ -119,7 +119,7 @@ def text_in_box(draw, box, text, fnt, fill=TEXT, pad=34, gap=10):
 def footer(draw, caption: str):
     draw.rectangle((0, H - 92, W, H), fill=(8, 12, 20))
     draw.text((86, H - 62), caption, font=F_SMALL, fill=TEXT)
-    draw.text((1420, H - 62), "KEEPERHUB READ RUN / WRITE TX PENDING", font=F_TINY, fill=AMBER)
+    draw.text((1395, H - 62), "KEEPERHUB READ RUN / WRITE TX VERIFIED", font=F_TINY, fill=GREEN)
 
 
 def header(draw, title: str, t: float):
@@ -151,8 +151,8 @@ def scene_hook(img, draw, p, receipts):
     text_block(draw, (108, 500), "A public-preview demo for policy-gated execution receipts around AI agents delegating onchain actions to KeeperHub.", F_BODY, MUTED, 1060)
     status_box = (106, 700, 1180, 850)
     rounded(draw, status_box, PANEL, outline=AMBER, radius=18)
-    text_in_box(draw, status_box, "Current status: KeeperHub MCP connected + read workflow run captured. Write tx pending.", F_BODY, AMBER, pad=40, gap=8)
-    footer(draw, "This preview is honest by design: real read run, no fake transaction hash.")
+    text_in_box(draw, status_box, "Current status: KeeperHub MCP connected + read workflow run + Base Sepolia tx captured.", F_BODY, GREEN, pad=40, gap=8)
+    footer(draw, "This preview is honest by design: real read run and real transaction hash.")
 
 
 def scene_evidence_first(img, draw, p, receipts):
@@ -161,7 +161,7 @@ def scene_evidence_first(img, draw, p, receipts):
         ("PUBLIC REPO", "github.com/kei99-web3/keeperhub-execution-receipt-kit", GREEN),
         ("TESTS", "keeperhub_execution_receipt_agent.test.js passed", BLUE),
         ("READ RUN", "wrun_01KWRFQK1EQG92MERS9N49G5W6 captured", PURPLE),
-        ("WRITE TX", "pending user-attended testnet transaction", AMBER),
+        ("WRITE TX", "0x3098fabd...02e66ac5 verified", GREEN),
     ]
     for i, (label, value, color) in enumerate(cards):
         x = 115 + (i % 2) * 860
@@ -210,9 +210,9 @@ def scene_approved(img, draw, p, receipts):
         (f"requestHash: {r['keeperHubRequestHash'][:34]}...", AMBER),
     ])
     text_block(draw, (1100, 250), "When every hard check passes, the kit prepares a KeeperHub-ready request and a deterministic receipt.", F_BODY, TEXT, 650)
-    rounded(draw, (1095, 530, 1765, 700), PANEL, outline=AMBER, radius=16)
-    text_block(draw, (1130, 562), "txHash is still null here. That is intentional until a write transaction is completed.", F_BODY, AMBER, 590)
-    footer(draw, "No fabricated evidence: tx hash remains null until a write run returns one.")
+    rounded(draw, (1095, 530, 1765, 720), PANEL, outline=GREEN, radius=16)
+    text_block(draw, (1130, 562), "txHash is now filled by a KeeperHub Base Sepolia write run: 0x3098fabd...02e66ac5", F_BODY, GREEN, 590)
+    footer(draw, "No fabricated evidence: tx hash comes from the real write run.")
 
 
 def scene_fail_closed(img, draw, p, receipts):
@@ -244,6 +244,7 @@ def scene_repo(img, draw, p, receipts):
         ("docs/policy_gate.md", TEXT),
         ("docs/keeperhub_integration_runbook.md", TEXT),
         ("examples/keeperhub_read_execution_evidence.json", GREEN),
+        ("examples/keeperhub_write_execution_evidence.json", GREEN),
         ("media/public-preview.mp4", AMBER),
     ])
     proof_box = (120, 690, 880, 835)
@@ -257,37 +258,37 @@ def scene_keeperhub_pending(img, draw, p, receipts):
     steps = [
         ("MCP endpoint", "Connected: https://app.keeperhub.com/mcp", GREEN),
         ("Read workflow", "Run id captured: wrun_01KWRFQK1EQG92MERS9N49G5W6", PURPLE),
-        ("Write tx", "Still pending user-attended testnet signing", AMBER),
-        ("Evidence", "Read receipt now, tx hash after write run", BLUE),
+        ("Write tx", "Base Sepolia tx: 0x3098fabd...02e66ac5", GREEN),
+        ("Evidence", "Read receipt and write receipt are both captured", BLUE),
     ]
     for i, (title, body, color) in enumerate(steps):
         y = 230 + i * 150
         rounded(draw, (130, y, 1765, y + 96), PANEL, outline=color, width=2, radius=16)
         draw.text((170, y + 25), f"{i + 1}. {title}", font=F_H2, fill=color)
         draw.text((650, y + 31), body, font=F_BODY, fill=TEXT)
-    footer(draw, "Read workflow proof is captured. Transaction-hash proof remains separate.")
+    footer(draw, "Read workflow proof and transaction-hash proof are captured.")
 
 
 def scene_submission(img, draw, p, receipts):
-    header(draw, "DoraHacks fields now vs after tx", p)
+    header(draw, "DoraHacks fields ready", p)
     left = (115, 240, 875, 780)
     right = (1035, 240, 1795, 780)
     rounded(draw, left, PANEL, outline=AMBER, radius=18)
     rounded(draw, right, PANEL, outline=GREEN, radius=18)
-    draw.text((left[0] + 34, left[1] + 34), "NOW", font=F_H2, fill=AMBER)
-    text_block(draw, (left[0] + 34, left[1] + 95), "Repo, video, and KeeperHub read run are ready. Transaction link is pending. Wording must distinguish read proof from write tx proof.", F_BODY, TEXT, 650)
-    draw.text((right[0] + 34, right[1] + 34), "AFTER TESTNET RUN", font=F_H2, fill=GREEN)
-    text_block(draw, (right[0] + 34, right[1] + 95), "Update README, receipt JSON, video, and DoraHacks fields with the real transaction hash after a write run.", F_BODY, TEXT, 650)
-    footer(draw, "Public today with read proof, final tx proof after one write transaction.")
+    draw.text((left[0] + 34, left[1] + 34), "EVIDENCE", font=F_H2, fill=GREEN)
+    text_block(draw, (left[0] + 34, left[1] + 95), "Repo, video, KeeperHub read run, and KeeperHub write tx are ready. The transaction link is public on BaseScan.", F_BODY, TEXT, 650)
+    draw.text((right[0] + 34, right[1] + 34), "SUBMISSION", font=F_H2, fill=GREEN)
+    text_block(draw, (right[0] + 34, right[1] + 95), "DoraHacks fields can now cite the real KeeperHub execution id and Base Sepolia transaction hash.", F_BODY, TEXT, 650)
+    footer(draw, "Public repo now has read proof plus transaction-hash proof.")
 
 
 def scene_close(img, draw, p, receipts):
     draw.text((110, 170), "Execution is the claim.", font=F_TITLE, fill=TEXT)
     draw.text((110, 265), "The receipt is the proof.", font=F_TITLE, fill=GREEN)
-    text_block(draw, (118, 425), "This public preview now includes one real KeeperHub read workflow run and its safety boundary. The final winning version should add one write transaction hash.", F_BODY, MUTED, 1180)
-    rounded(draw, (118, 690, 1520, 825), PANEL, outline=AMBER, radius=18)
-    draw.text((158, 735), "Public preview ready. Read run captured; write tx pending.", font=F_H2, fill=AMBER)
-    footer(draw, "Next: run one user-attended testnet write transaction for tx hash proof.")
+    text_block(draw, (118, 425), "This public preview now includes one real KeeperHub read workflow run, one real Base Sepolia write transaction, and a safety boundary around both.", F_BODY, MUTED, 1180)
+    rounded(draw, (118, 690, 1580, 825), PANEL, outline=GREEN, radius=18)
+    draw.text((158, 735), "Public preview ready. Read run and write tx captured.", font=F_H2, fill=GREEN)
+    footer(draw, "Next: submit the evidence packet before the deadline.")
 
 
 SCENES = [
