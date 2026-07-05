@@ -7,3 +7,4 @@ npm-debug.log*
 *.token
 coverage/
 dist/
+media/demo_build/

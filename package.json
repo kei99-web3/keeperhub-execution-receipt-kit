@@ -6,6 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "demo": "node src/keeperhub_execution_receipt_agent.js",
+    "render:video": "python tools/render_demo_video.py",
     "test": "node test/keeperhub_execution_receipt_agent.test.js"
   },
   "keywords": [

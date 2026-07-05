@@ -1,7 +1,3 @@
-﻿
-> keeperhub-execution-receipt-kit@0.1.0 demo
-> node src/keeperhub_execution_receipt_agent.js
-
 {
   "project": "KeeperHub Execution Receipt Kit",
   "status": "mock_only_no_wallet_no_keeperhub_api_no_network",
