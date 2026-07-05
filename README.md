@@ -44,12 +44,12 @@ No dependencies are required beyond Node.js.
 
 ## Demo Video
 
-Draft video:
+Public preview video:
 
-- `media/keeperhub-execution-receipt-demo-draft.mp4`
-- `media/keeperhub-execution-receipt-demo-draft-contact-sheet.jpg`
+- `media/keeperhub-execution-receipt-public-preview.mp4`
+- `media/keeperhub-execution-receipt-public-preview-contact-sheet.jpg`
 
-This draft is intentionally marked as pre-transaction evidence. After a user-approved KeeperHub testnet run, replace it with a final video that includes the real workflow/run id and transaction hash.
+This public preview is intentionally marked as pre-transaction evidence. After a user-approved KeeperHub testnet run, replace it with a final video that includes the real workflow/run id and transaction hash.
 
 ## Planned KeeperHub Integration
 

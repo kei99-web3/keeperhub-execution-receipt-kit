@@ -8,3 +8,4 @@ npm-debug.log*
 coverage/
 dist/
 media/demo_build/
+media/public_preview_build/
