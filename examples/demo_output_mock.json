@@ -1,0 +1,402 @@
+﻿
+> keeperhub-execution-receipt-kit@0.1.0 demo
+> node src/keeperhub_execution_receipt_agent.js
+
+{
+  "project": "KeeperHub Execution Receipt Kit",
+  "status": "mock_only_no_wallet_no_keeperhub_api_no_network",
+  "approvalBoundary": "real KeeperHub execution requires explicit user approval",
+  "policy": {
+    "id": "policy_keeperhub_demo_v1",
+    "owner": "demo treasury operator",
+    "allowedChains": [
+      "ethereum-sepolia",
+      "base-sepolia"
+    ],
+    "allowedProtocols": [
+      "aave-v3",
+      "uniswap-v3"
+    ],
+    "allowedActions": [
+      "supply",
+      "rebalance",
+      "swap"
+    ],
+    "allowedAssets": [
+      "USDC",
+      "WETH"
+    ],
+    "allowedDestinations": [
+      "keeperhub-aave-v3-usdc-vault",
+      "keeperhub-uniswap-v3-router"
+    ],
+    "maxUsdPerRun": 25,
+    "maxSlippageBps": 50,
+    "minConfidenceBps": 7600,
+    "requireSimulation": true,
+    "requirePrivateRouting": true,
+    "approvalBoundary": "real KeeperHub execution requires explicit user approval"
+  },
+  "receipts": [
+    {
+      "schema": "keeperhub.execution_receipt.v0",
+      "scenario": "in_policy_yield_rebalance",
+      "createdAt": "2026-07-05T00:00:00.000Z",
+      "status": "approved_for_prepared_execution",
+      "intent": "Move 18 USDC from idle treasury balance into the approved Aave v3 USDC supply workflow if simulated APY is above 4%.",
+      "policyId": "policy_keeperhub_demo_v1",
+      "intentHash": "sha256:8ce2b4e08788e074d37a69ce2872b2382c0c1db2b65838a14297d909edfd55a4",
+      "policyHash": "sha256:ffed4f557f8a5e32cf29d59c277424542c67ea550645c6d3b92bac7b49279acf",
+      "signal": {
+        "apyBps": 431,
+        "liquidityUsd": 1200000,
+        "staleSeconds": 18
+      },
+      "policyEvaluation": {
+        "status": "approved_for_prepared_execution",
+        "checks": [
+          {
+            "name": "chain_allowed",
+            "passed": true,
+            "detail": "chain=base-sepolia"
+          },
+          {
+            "name": "protocol_allowed",
+            "passed": true,
+            "detail": "protocol=aave-v3"
+          },
+          {
+            "name": "action_allowed",
+            "passed": true,
+            "detail": "action=supply"
+          },
+          {
+            "name": "asset_allowed",
+            "passed": true,
+            "detail": "asset=USDC"
+          },
+          {
+            "name": "destination_allowed",
+            "passed": true,
+            "detail": "destination=keeperhub-aave-v3-usdc-vault"
+          },
+          {
+            "name": "amount_under_cap",
+            "passed": true,
+            "detail": "amountUsd=18, max=25"
+          },
+          {
+            "name": "confidence_high_enough",
+            "passed": true,
+            "detail": "confidenceBps=8420, min=7600"
+          },
+          {
+            "name": "simulation_passed",
+            "passed": true,
+            "detail": "simulationOk=true"
+          },
+          {
+            "name": "slippage_under_cap",
+            "passed": true,
+            "detail": "slippageBps=0, max=50"
+          },
+          {
+            "name": "private_route_present",
+            "passed": true,
+            "detail": "privateRouting=true"
+          }
+        ],
+        "hardFailures": []
+      },
+      "keeperHubRequest": {
+        "surface": "keeperhub-mcp-or-cli",
+        "proposedTool": "call_workflow",
+        "workflowSlug": "aave-v3-supply-usdc",
+        "chain": "base-sepolia",
+        "executionMode": "mock_only_pending_user_approved_keeperhub_run",
+        "inputs": {
+          "asset": "USDC",
+          "amountUsd": 18,
+          "destination": "keeperhub-aave-v3-usdc-vault",
+          "maxSlippageBps": 50,
+          "requirePrivateRouting": true
+        },
+        "expectedKeeperHubEvidenceAfterApproval": [
+          "workflow run id",
+          "simulation result",
+          "submitted transaction hash",
+          "gas used",
+          "outcome",
+          "timestamp",
+          "audit log export"
+        ]
+      },
+      "keeperHubRequestHash": "sha256:bbf744ecb7060bb79a7213167f3f16613a686c07ee3041b18985bbe9d72dbe08",
+      "executionEvidence": {
+        "current": "local_mock_only",
+        "nextRequired": "attach real KeeperHub run id and transaction hash after user approval",
+        "txHash": null,
+        "auditTrailUrl": null
+      },
+      "receiptHash": "sha256:3f2e4cfe61a452d6177d9a14b3cfdf4ab2b3d30843bc6441d069e41eca9f2f17"
+    },
+    {
+      "schema": "keeperhub.execution_receipt.v0",
+      "scenario": "over_cap_rebalance_blocked",
+      "createdAt": "2026-07-05T00:00:00.000Z",
+      "status": "blocked_fail_closed",
+      "intent": "Move 180 USDC into the approved Aave v3 USDC supply workflow.",
+      "policyId": "policy_keeperhub_demo_v1",
+      "intentHash": "sha256:01a8dc7021ac9f7519ba64b8ef135f89184ab6344518f13802e9793ad8f336f2",
+      "policyHash": "sha256:ffed4f557f8a5e32cf29d59c277424542c67ea550645c6d3b92bac7b49279acf",
+      "signal": {
+        "apyBps": 445,
+        "liquidityUsd": 1200000,
+        "staleSeconds": 20
+      },
+      "policyEvaluation": {
+        "status": "blocked_fail_closed",
+        "checks": [
+          {
+            "name": "chain_allowed",
+            "passed": true,
+            "detail": "chain=base-sepolia"
+          },
+          {
+            "name": "protocol_allowed",
+            "passed": true,
+            "detail": "protocol=aave-v3"
+          },
+          {
+            "name": "action_allowed",
+            "passed": true,
+            "detail": "action=supply"
+          },
+          {
+            "name": "asset_allowed",
+            "passed": true,
+            "detail": "asset=USDC"
+          },
+          {
+            "name": "destination_allowed",
+            "passed": true,
+            "detail": "destination=keeperhub-aave-v3-usdc-vault"
+          },
+          {
+            "name": "amount_under_cap",
+            "passed": false,
+            "detail": "amountUsd=180, max=25"
+          },
+          {
+            "name": "confidence_high_enough",
+            "passed": true,
+            "detail": "confidenceBps=8200, min=7600"
+          },
+          {
+            "name": "simulation_passed",
+            "passed": true,
+            "detail": "simulationOk=true"
+          },
+          {
+            "name": "slippage_under_cap",
+            "passed": true,
+            "detail": "slippageBps=0, max=50"
+          },
+          {
+            "name": "private_route_present",
+            "passed": true,
+            "detail": "privateRouting=true"
+          }
+        ],
+        "hardFailures": [
+          {
+            "name": "amount_under_cap",
+            "passed": false,
+            "detail": "amountUsd=180, max=25"
+          }
+        ]
+      },
+      "keeperHubRequest": null,
+      "keeperHubRequestHash": null,
+      "executionEvidence": {
+        "current": "blocked_before_execution",
+        "nextRequired": "human review or policy change",
+        "txHash": null,
+        "auditTrailUrl": null
+      },
+      "receiptHash": "sha256:e3275cfbbd966665366c9be25041d51d17f33e42353d958137f1f9c9335ddf42"
+    },
+    {
+      "schema": "keeperhub.execution_receipt.v0",
+      "scenario": "wrong_destination_blocked",
+      "createdAt": "2026-07-05T00:00:00.000Z",
+      "status": "blocked_fail_closed",
+      "intent": "Swap 12 USDC into WETH using an unknown router because it quotes a better price.",
+      "policyId": "policy_keeperhub_demo_v1",
+      "intentHash": "sha256:da4276f3711000d59d7d09176e3eafd080732ee65bf521ee2fb86b287b5485ac",
+      "policyHash": "sha256:ffed4f557f8a5e32cf29d59c277424542c67ea550645c6d3b92bac7b49279acf",
+      "signal": {
+        "apyBps": 0,
+        "liquidityUsd": 800000,
+        "staleSeconds": 9
+      },
+      "policyEvaluation": {
+        "status": "blocked_fail_closed",
+        "checks": [
+          {
+            "name": "chain_allowed",
+            "passed": true,
+            "detail": "chain=base-sepolia"
+          },
+          {
+            "name": "protocol_allowed",
+            "passed": true,
+            "detail": "protocol=uniswap-v3"
+          },
+          {
+            "name": "action_allowed",
+            "passed": true,
+            "detail": "action=swap"
+          },
+          {
+            "name": "asset_allowed",
+            "passed": true,
+            "detail": "asset=USDC"
+          },
+          {
+            "name": "destination_allowed",
+            "passed": false,
+            "detail": "destination=unknown-router"
+          },
+          {
+            "name": "amount_under_cap",
+            "passed": true,
+            "detail": "amountUsd=12, max=25"
+          },
+          {
+            "name": "confidence_high_enough",
+            "passed": true,
+            "detail": "confidenceBps=8300, min=7600"
+          },
+          {
+            "name": "simulation_passed",
+            "passed": true,
+            "detail": "simulationOk=true"
+          },
+          {
+            "name": "slippage_under_cap",
+            "passed": true,
+            "detail": "slippageBps=20, max=50"
+          },
+          {
+            "name": "private_route_present",
+            "passed": true,
+            "detail": "privateRouting=true"
+          }
+        ],
+        "hardFailures": [
+          {
+            "name": "destination_allowed",
+            "passed": false,
+            "detail": "destination=unknown-router"
+          }
+        ]
+      },
+      "keeperHubRequest": null,
+      "keeperHubRequestHash": null,
+      "executionEvidence": {
+        "current": "blocked_before_execution",
+        "nextRequired": "human review or policy change",
+        "txHash": null,
+        "auditTrailUrl": null
+      },
+      "receiptHash": "sha256:ae92146e83573c43a04050cab5e4659bd217ac626b906a4f9ec70334c973d338"
+    },
+    {
+      "schema": "keeperhub.execution_receipt.v0",
+      "scenario": "low_confidence_escalation",
+      "createdAt": "2026-07-05T00:00:00.000Z",
+      "status": "blocked_fail_closed",
+      "intent": "Rebalance 10 USDC into a new route with fresh but thin liquidity.",
+      "policyId": "policy_keeperhub_demo_v1",
+      "intentHash": "sha256:a454b6f7ded4f71723a67e264aa3919f7eb0e4a0d3fb36458d5ccce61d8699d2",
+      "policyHash": "sha256:ffed4f557f8a5e32cf29d59c277424542c67ea550645c6d3b92bac7b49279acf",
+      "signal": {
+        "apyBps": 0,
+        "liquidityUsd": 4200,
+        "staleSeconds": 7
+      },
+      "policyEvaluation": {
+        "status": "blocked_fail_closed",
+        "checks": [
+          {
+            "name": "chain_allowed",
+            "passed": true,
+            "detail": "chain=base-sepolia"
+          },
+          {
+            "name": "protocol_allowed",
+            "passed": true,
+            "detail": "protocol=uniswap-v3"
+          },
+          {
+            "name": "action_allowed",
+            "passed": true,
+            "detail": "action=swap"
+          },
+          {
+            "name": "asset_allowed",
+            "passed": true,
+            "detail": "asset=USDC"
+          },
+          {
+            "name": "destination_allowed",
+            "passed": true,
+            "detail": "destination=keeperhub-uniswap-v3-router"
+          },
+          {
+            "name": "amount_under_cap",
+            "passed": true,
+            "detail": "amountUsd=10, max=25"
+          },
+          {
+            "name": "confidence_high_enough",
+            "passed": false,
+            "detail": "confidenceBps=6100, min=7600"
+          },
+          {
+            "name": "simulation_passed",
+            "passed": true,
+            "detail": "simulationOk=true"
+          },
+          {
+            "name": "slippage_under_cap",
+            "passed": true,
+            "detail": "slippageBps=45, max=50"
+          },
+          {
+            "name": "private_route_present",
+            "passed": true,
+            "detail": "privateRouting=true"
+          }
+        ],
+        "hardFailures": [
+          {
+            "name": "confidence_high_enough",
+            "passed": false,
+            "detail": "confidenceBps=6100, min=7600"
+          }
+        ]
+      },
+      "keeperHubRequest": null,
+      "keeperHubRequestHash": null,
+      "executionEvidence": {
+        "current": "blocked_before_execution",
+        "nextRequired": "human review or policy change",
+        "txHash": null,
+        "auditTrailUrl": null
+      },
+      "receiptHash": "sha256:0e56be7ff6f495ae3cd66440f0b8dc1c21e065517eb6e1f3547706ec21c658d9"
+    }
+  ]
+}

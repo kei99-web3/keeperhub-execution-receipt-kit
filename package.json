@@ -1,0 +1,20 @@
+{
+  "name": "keeperhub-execution-receipt-kit",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Policy-gated execution receipts for AI agents preparing KeeperHub onchain workflow requests.",
+  "type": "commonjs",
+  "scripts": {
+    "demo": "node src/keeperhub_execution_receipt_agent.js",
+    "test": "node test/keeperhub_execution_receipt_agent.test.js"
+  },
+  "keywords": [
+    "keeperhub",
+    "ai-agents",
+    "onchain",
+    "mcp",
+    "execution-receipts",
+    "policy-gate"
+  ],
+  "license": "UNLICENSED"
+}

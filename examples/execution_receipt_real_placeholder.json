@@ -1,0 +1,13 @@
+{
+  "status": "placeholder_not_real_evidence",
+  "do_not_submit_as_transaction_proof": true,
+  "workflowRunId": null,
+  "transactionHash": null,
+  "chain": null,
+  "network": null,
+  "timestamp": null,
+  "gasOrFee": null,
+  "outcome": null,
+  "auditTrailUrl": null,
+  "note": "Populate only after a user-approved KeeperHub run returns real evidence."
+}
