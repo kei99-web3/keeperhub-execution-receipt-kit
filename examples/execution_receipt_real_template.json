@@ -1,0 +1,21 @@
+{
+  "schema": "keeperhub.execution_receipt.v0",
+  "status": "template_waiting_for_real_keeperhub_execution",
+  "do_not_submit_as_transaction_proof_until_populated": true,
+  "keeperHubEvidence": {
+    "workflowRunId": null,
+    "transactionHash": null,
+    "chain": null,
+    "network": null,
+    "timestamp": null,
+    "outcome": null,
+    "gasOrFee": null,
+    "auditTrailUrl": null
+  },
+  "receiptUpdateChecklist": [
+    "Populate only after a user-approved KeeperHub testnet run returns real evidence.",
+    "Keep the exact chain/network label.",
+    "Do not fabricate tx hash, run id, or audit URL.",
+    "Update README and DoraHacks fields with the same evidence."
+  ]
+}
