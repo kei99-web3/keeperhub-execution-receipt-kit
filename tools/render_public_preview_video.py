@@ -104,6 +104,18 @@ def text_block(draw, xy, text, fnt, fill=TEXT, width=900, gap=10):
     return y
 
 
+def text_in_box(draw, box, text, fnt, fill=TEXT, pad=34, gap=10):
+    return text_block(
+        draw,
+        (box[0] + pad, box[1] + pad),
+        text,
+        fnt,
+        fill,
+        max(1, box[2] - box[0] - pad * 2),
+        gap,
+    )
+
+
 def footer(draw, caption: str):
     draw.rectangle((0, H - 92, W, H), fill=(8, 12, 20))
     draw.text((86, H - 62), caption, font=F_SMALL, fill=TEXT)
@@ -137,8 +149,9 @@ def scene_hook(img, draw, p, receipts):
     draw.text((100, 250), "prove what it did", font=F_TITLE, fill=GREEN)
     draw.text((100, 345), "before and after KeeperHub?", font=F_TITLE, fill=TEXT)
     text_block(draw, (108, 500), "A public-preview demo for policy-gated execution receipts around AI agents delegating onchain actions to KeeperHub.", F_BODY, MUTED, 1060)
-    rounded(draw, (106, 710, 1180, 830), PANEL, outline=AMBER, radius=18)
-    draw.text((146, 745), "Current status: local prototype + public repo + public preview. Real KeeperHub tx pending OAuth.", font=F_BODY, fill=AMBER)
+    status_box = (106, 700, 1180, 850)
+    rounded(draw, status_box, PANEL, outline=AMBER, radius=18)
+    text_in_box(draw, status_box, "Current status: local prototype + public repo + public preview. Real KeeperHub tx pending OAuth.", F_BODY, AMBER, pad=40, gap=8)
     footer(draw, "This preview is honest by design: no fake tx hash, no fake KeeperHub run id.")
 
 
@@ -232,8 +245,9 @@ def scene_repo(img, draw, p, receipts):
         ("docs/keeperhub_integration_runbook.md", TEXT),
         ("media/public-preview.mp4", AMBER),
     ])
-    rounded(draw, (120, 710, 840, 820), PANEL, outline=GREEN, radius=16)
-    draw.text((158, 750), "No secrets. No wallet data. No fake transaction evidence.", font=F_BODY, fill=GREEN)
+    proof_box = (120, 690, 880, 835)
+    rounded(draw, proof_box, PANEL, outline=GREEN, radius=16)
+    text_in_box(draw, proof_box, "No secrets. No wallet data. No fake transaction evidence.", F_BODY, GREEN, pad=38, gap=8)
     footer(draw, "Repo URL is already public and ready for DoraHacks draft fields.")
 
 
